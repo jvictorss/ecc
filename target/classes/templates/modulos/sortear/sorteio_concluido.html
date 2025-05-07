@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html>
+<html lang="pt-br" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="https://www.thymeleaf.org"
+      th:replace="base/fragments/index :: index(~{::section})">
+<head></head>
+<body>
+<span th:text="${session.rodape != null ? session.rodape.textCopyright : 'Texto padrão'}"></span>
+<link th:href="${theme != null ? theme : 'core2.css'}" rel="stylesheet">
+<link th:href="${themeBord != null ? themeBord : 'theme-default.css'}" rel="stylesheet">
+
+<section>
+    <div class="card shadow-sm p-4">
+        <h3 class="text-center mb-4"
+            th:text="'Resultado do sorteio ' + ${sorteados.getSorteio()} + ' realizado em ' + ${sorteados.getHoraSorteio()} + ':'">
+        </h3>
+
+        <div class="text-center">
+            <p class="fw-bold">Contemplados:</p>
+            <table class="table table-bordered table-hover w-75 mx-auto">
+                <thead class="table-light">
+                <tr>
+                    <th>Nome</th>
+                    <th>CPF</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="participante : ${sorteados.participantes}">
+                    <td th:text="${participante.nome}">Nome</td>
+                    <td th:text="${participante.cpf}">CPF</td>
+                </tr>
+                </tbody>
+            </table>
+
+            <div class="pt-4">
+                <a class="btn btn-primary" href="/sorteio/v1/sorteio/">Voltar</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<th:block th:replace="base/fragments/head :: head-js-base"/>
+<th:block th:replace="base/fragments/mensagens"/>
+</body>
+</html>
