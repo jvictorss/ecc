@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html>
+<html lang="pt-br" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+      th:replace="base/fragments/index :: index(~{::section})">
+    <head></head>
+    <body>
+    <span th:text="${session.rodape != null ? session.rodape.textCopyright : 'Texto padrão'}"></span>
+    <link th:href="${theme != null ? theme : 'core2.css'}" rel="stylesheet">
+    <link th:href="${themeBord != null ? themeBord : 'theme-default.css'}" rel="stylesheet">
+    <section>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item" aria-current="page"><a th:href="@{/v1/painel}">Home</a></li>
+                <li class="breadcrumb-item" aria-current="page"><a th:href="@{/v1/setorial/list}">Setorial</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Formulário</li>
+            </ol>
+        </nav>
+        <form id="validate_setorial" th:action="@{/v1/painel/setorial/enviar}" method="post" class="was-validated" th:object="${setorial}">
+            <input type="hidden" id="id" name="id" th:field="*{id}">
+            <input type="hidden" class="metodo" th:value="${metodo}">
+            <input type="hidden" class="retorno" th:value="@{/v1/painel/setorial/list}">
+            <div class="card">
+                <div class="card-header">Cadastro de Setorial
+                    <a th:href="@{/v1/painel/setorial/list}" style="float: right;" id="lk2">
+                        <i class="fas fa-clipboard-list"></i> Exibir Cadastrados
+                    </a>
+                </div>
+                <div class="card-body">
+                    <div class="form-group col-md-9">
+                        <label for="nomeSetor">Nome Setor</label> <label class="cor_red">*</label>
+                        <input type="text" class="form-control" id="nomeSetor" name="nomeSetor" placeholder="Nome do Setor" th:field="*{nomeSetor}" required>
+                        <span th:if="${#fields.hasErrors('nomeSetor')}" th:errors="*{nomeSetor}" class="error">Campo Obrigatório</span>
+                    </div>
+                    <div class="form-group col-md-9">
+                        <label for="nomeCasalSetorial">Nome Casal Setorial (Ele/Ela)</label> <label class="cor_red">*</label>
+                        <input type="text" class="form-control" id="nomeCasalSetorial" name="nomeCasalSetorial" placeholder="Nome Casal Setorial (Ele/Ela)" th:field="*{nomeCasalSetorial}" required>
+                        <span th:if="${#fields.hasErrors('nomeCasalSetorial')}" th:errors="*{nomeCasalSetorial}" class="error">Campo Obrigatório</span>
+                    </div>
+                    <div class="form-group col-md-9">
+                        <label for="contatoCasalSetorial">Contato Casal Setorial</label> <label class="cor_red">*</label>
+                        <input type="text" class="form-control" id="contatoCasalSetorial" name="contatoCasalSetorial" placeholder="Contato Casal Setorial" th:field="*{contatoCasalSetorial}" required>
+                        <span th:if="${#fields.hasErrors('contatoCasalSetorial')}" th:errors="*{contatoCasalSetorial}" class="error">Campo Obrigatório</span>
+                    </div>
+                    <div class="form-group col-md-9">
+                        <label for="emailCasalSetorial">E-mail Casal Setorial</label> <label class="cor_red">*</label>
+                        <input type="email" class="form-control" id="emailCasalSetorial" name="emailCasalSetorial" placeholder="E-mail Casal Setorial" th:field="*{emailCasalSetorial}" required>
+                        <span th:if="${#fields.hasErrors('emailCasalSetorial')}" th:errors="*{emailCasalSetorial}" class="error">Campo Obrigatório</span>
+                    </div>
+                    <div class="form-group col-md-9">
+                        <label for="diocese">Diocese</label> <label class="cor_red">*</label>
+                        <select class="form-control" id="diocese" name="diocese" th:field="*{diocese}" required>
+                            <option value="">Selecione uma Diocese</option>
+                            <option th:each="diocese : ${dioceses}" th:value="${diocese.id}" th:text="${diocese.nome}"></option>
+                        </select>
+                        <span th:if="${#fields.hasErrors('diocese')}" th:errors="*{diocese}" class="error">Campo Obrigatório</span>
+                    </div>
+                    <div class="form-group col-md-8">
+                        <label for="observacao">Observação</label>
+                        <input type="text" class="form-control" id="observacao" name="observacao" placeholder="Observação" th:field="*{observacao}">
+                        <span th:if="${#fields.hasErrors('observacao')}" th:errors="*{observacao}" class="error">Campo Obrigatório</span>
+                    </div>
+                </div>
+                <div class="card-footer text-right">
+                    <div class="btn-group" role="group" aria-label="Basic example">
+                        <button type="submit" class="btn btn-success text_btn_shd"><i class="fas fa-save"></i> Salvar</button>
+                        <a type="button" class="btn btn-warning text_btn_shd" th:href="@{/v1/painel/setorial/form}"><i class="fas fa-pencil"></i> Limpar</a>
+                        <a type="button" class="btn btn-danger text_btn_shd" th:href="@{/v1/painel/setorial/list}"><i class="fas fa-window-close"></i> Cancelar</a>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <th:block th:replace="base/fragments/head :: head-js-base-envio"/>
+    </section>
+    </body>
+</html>

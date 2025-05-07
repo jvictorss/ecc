@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org"
+      th:replace="base/fragments/index :: index(~{::section})">
+<head></head>
+<body>
+
+<section>
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a th:href="@{/v1/painel}">Home</a></li>
+            <li class="breadcrumb-item"><a th:href="@{/v1/casal/list}">Casais</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Formulário</li>
+        </ol>
+    </nav>
+
+    <form th:action="@{/v1/casal/enviar}" method="post" class="was-validated" th:object="${casal}">
+        <input type="hidden" th:field="*{id}" />
+        <div class="card">
+            <div class="card-header">Cadastro de Casal
+                <a th:href="@{/v1/casal/list}" class="float-right"><i class="fas fa-clipboard-list"></i> Exibir Cadastrados</a>
+            </div>
+
+            <div class="card-body">
+
+                <!-- Dados do Casal -->
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label>Nome completo do casal</label><label class="cor_red"> *</label>
+                        <input type="text" th:field="*{nomeCasal}" class="form-control" required>
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label>Apelido dele</label><label class="cor_red"> *</label>
+                        <input type="text" th:field="*{apelidoEle}" class="form-control" required>
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label>Apelido dela</label><label class="cor_red"> *</label>
+                        <input type="text" th:field="*{apelidoEla}" class="form-control" required>
+                    </div>
+                </div>
+
+                <!-- Contatos (sem CPF) -->
+                <div class="form-row">
+                    <div class="form-group col-md-3">
+                        <label>Telefone dele</label><label class="cor_red"> *</label>
+                        <input type="text" th:field="*{telefoneEle}" class="form-control" required>
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label>Telefone dela</label><label class="cor_red"> *</label>
+                        <input type="text" th:field="*{telefoneEla}" class="form-control" required>
+                    </div>
+                </div>
+
+                <!-- WhatsApp e E-mails -->
+                <div class="form-row">
+                    <div class="form-group col-md-2">
+                        <div class="form-check mt-4">
+                            <input class="form-check-input" type="checkbox" th:field="*{whatsappEle}" id="whatsappEle">
+                            <label class="form-check-label" for="whatsappEle">WhatsApp dele</label>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-2">
+                        <div class="form-check mt-4">
+                            <input class="form-check-input" type="checkbox" th:field="*{whatsappEla}" id="whatsappEla">
+                            <label class="form-check-label" for="whatsappEla">WhatsApp dela</label>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label>Email dele</label>
+                        <input type="email" th:field="*{emailEle}" class="form-control">
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label>Email dela</label>
+                        <input type="email" th:field="*{emailEla}" class="form-control">
+                    </div>
+                </div>
+
+                <!-- Datas -->
+                <div class="form-row">
+                    <div class="form-group col-md-3">
+                        <label>Data de nascimento dele</label><label class="cor_red"> *</label>
+                        <input type="date" th:field="*{dataNascimentoEle}" class="form-control" required>
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label>Data de nascimento dela</label><label class="cor_red"> *</label>
+                        <input type="date" th:field="*{dataNascimentoEla}" class="form-control" required>
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label>Casamento Civil</label>
+                        <input type="date" th:field="*{casamentoCivil}" class="form-control">
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label>Casamento Religioso</label>
+                        <input type="date" th:field="*{casamentoReligioso}" class="form-control">
+                    </div>
+                </div>
+
+                <!-- Etapas e Localidade -->
+                <div class="form-row">
+                    <div class="form-group col-md-2">
+                        <label>Ano 1ª etapa</label>
+                        <input type="number" th:field="*{anoPrimeiraEtapa}" class="form-control">
+                    </div>
+                    <div class="form-group col-md-2">
+                        <label>Ano 2ª etapa</label>
+                        <input type="number" th:field="*{anoSegundaEtapa}" class="form-control">
+                    </div>
+                    <div class="form-group col-md-2">
+                        <label>Ano 3ª etapa</label>
+                        <input type="number" th:field="*{anoTerceiraEtapa}" class="form-control">
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label>Paróquia do ECC</label>
+                        <input type="text" th:field="*{paroquiaECC}" class="form-control">
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label>Diocese</label>
+                        <input type="text" th:field="*{diocese}" class="form-control">
+                    </div>
+                </div>
+
+                <!-- Status -->
+                <div class="form-row">
+                    <div class="form-group col-md-3">
+                        <label>Situação</label>
+                        <select class="form-control" th:field="*{ativo}">
+                            <option th:value="true">Ativo</option>
+                            <option th:value="false">Inativo</option>
+                        </select>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="card-footer text-right">
+                <div class="btn-group">
+                    <button type="submit" class="btn btn-success"><i class="fas fa-save"></i> Salvar</button>
+                    <a th:href="@{/v1/casal/form}" class="btn btn-warning"><i class="fas fa-pencil-alt"></i> Limpar</a>
+                    <a th:href="@{/v1/casal/list}" class="btn btn-danger"><i class="fas fa-times"></i> Cancelar</a>
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <th:block th:replace="base/fragments/head :: head-js-base-envio"/>
+</section>
+
+</body>
+</html>

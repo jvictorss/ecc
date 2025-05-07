@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html>
+<html lang="pt-br" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+      th:replace="base/fragments/index :: index(~{::section})">
+    <head></head>
+    <body>
+    <span th:text="${session.rodape != null ? session.rodape.textCopyright : 'Texto padrão'}"></span>
+    <link th:href="${theme != null ? theme : 'core2.css'}" rel="stylesheet">
+    <link th:href="${themeBord != null ? themeBord : 'theme-default.css'}" rel="stylesheet">
+    <section>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item" aria-current="page"><a th:href="@{/v1/painel}">Home</a></li>
+                <li class="breadcrumb-item" aria-current="page"><a th:href="@{/v1/diocese/list}">Diocese</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Formulário</li>
+            </ol>
+        </nav>
+        <form id="validate_diocese" th:action="@{/v1/painel/diocese/enviar}" method="post" class="was-validated" th:object="${diocese}">
+                <input type="hidden" id="id" name="id" th:field="*{id}">
+                <input type="hidden" id="senha" name="senha" value="1">
+                <input type="hidden" class="metodo" th:value="${metodo}">
+                <input type="hidden" class="retorno" th:value="@{/v1/painel/diocese/list}">
+<!--                <input type="hidden" class="retorno" th:value="@{#authentication.getPrincipal().getTipo()} == 'ROLE_ADMINISTRADOR'?'/v1/painel/diocese/list':'/v1/painel'">-->
+                <input type="hidden" class="url" th:value="@{/v1/diocese}">
+                <div class="card">
+                    <div class="card-header">Cadastro de Diocese <a th:href="@{/v1/painel/diocese/list}" style="float: right;" id="lk2"><i class="fas fa-clipboard-list"></i> Exibir Cadastrados</a></div>
+                    <div class="card-body">
+                        <div class="form-group col-md-9">
+                            <label for="nome">Nome</label> <label class="cor_red">*</label>
+                            <input type="text" class="form-control" id="nome" name="nome" placeholder="Nome" th:field="*{nome}" required>
+                            <span th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}" class="error">Campo Obrigatório</span>
+                        </div>
+<!--                        <div class="form-group col-md-9">-->
+<!--                            <label for="cidade">Nome</label> <label class="cor_red">*</label>-->
+<!--                            <input type="text" class="form-control" id="cidade" name="cidade" placeholder="Nome" th:field="*{nome}" required>-->
+<!--                            <span th:if="${#fields.hasErrors('cidade')}" th:errors="*{cidade}" class="error">Campo Obrigatório</span>-->
+<!--                        </div>-->
+                        <div class="form-group col-md-3">
+                            <label for="cidade">Cidade</label> <label class="cor_red">*</label>
+                            <input type="text" class="form-control cidade" id="cidade" name="cidade" placeholder="cidade" th:field="*{cidade}" required>
+                            <span th:if="${#fields.hasErrors('cidade')}" th:errors="*{cidade}" class="error">Campo Obrigatório</span>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="estado">estado</label> <label class="cor_red">*</label>
+                            <select class="form-control" id="estado" name="estado" th:field="*{estado}" required>
+                                <option value="">Selecione uma opção</option>
+                                <option value="Acre">Acre</option>
+                                <option value="Alagoas">Alagoas</option>
+                                <option value="Amapá">Amapá</option>
+                                <option value="Amazonas">Amazonas</option>
+                                <option value="Bahia">Bahia</option>
+                                <option value="Ceará">Ceará</option>
+                                <option value="Distrito Federal">Distrito Federal</option>
+                                <option value="Espírito Santo">Espírito Santo</option>
+                                <option value="Goiás">Goiás</option>
+                                <option value="Maranhão">Maranhão</option>
+                                <option value="Mato Grosso">Mato Grosso</option>
+                                <option value="Mato Grosso do Sul">Mato Grosso do Sul</option>
+                                <option value="Minas Gerais">Minas Gerais</option>
+                                <option value="Pará">Pará</option>
+                                <option value="Paraíba">Paraíba</option>
+                                <option value="Paraná">Paraná</option>
+                                <option value="Pernambuco">Pernambuco</option>
+                                <option value="Piauí">Piauí</option>
+                                <option value="Rio de Janeiro">Rio de Janeiro</option>
+                                <option value="Rio Grande do Norte">Rio Grande do Norte</option>
+                                <option value="Rio Grande do Sul">Rio Grande do Sul</option>
+                                <option value="Rondônia">Rondônia</option>
+                                <option value="Roraima">Roraima</option>
+                                <option value="Santa Catarina">Santa Catarina</option>
+                                <option value="São Paulo">São Paulo</option>
+                                <option value="Sergipe">Sergipe</option>
+                                <option value="Tocantins">Tocantins</option>
+                            </select>
+                            <span th:if="${#fields.hasErrors('estado')}" th:errors="*{estado}" class="error">Campo Obrigatório</span>
+                        </div>
+                        <div class="form-group col-md-8">
+                            <label for="observacao">Observação</label>
+                            <input type="text" class="form-control" id="observacao" name="observacao" placeholder="Observação" th:field="*{observacao}">
+                            <span th:if="${#fields.hasErrors('observacao')}" th:errors="*{observacao}" class="error">Campo Obrigatório</span>
+                        </div>
+                    </div>
+                    <div class="card-footer text-right">
+                        <div class="btn-group" role="group" aria-label="Basic example">
+                            <button type="submit" class="btn btn-success text_btn_shd"><i class="fas fa-save"></i> Salvar</button>
+                            <a type="button" class="btn btn-warning text_btn_shd" th:if="${#authentication.getPrincipal().getTipo()} == 'ROLE_ADMINISTRADOR'" th:href="@{/v1/painel/diocese/form}"><i class="fas fa-pencil"></i> Limpar</a>
+                            <a type="button" class="btn btn-danger text_btn_shd" th:if="${#authentication.getPrincipal().getTipo()} == 'ROLE_ADMINISTRADOR'" th:href="@{/v1/painel/diocese/list}"><i class="fas fa-window-close"></i> Cancelar</a>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <th:block th:replace="base/fragments/head :: head-js-base-envio"/>
+    </section>
+   </body>
+</html>

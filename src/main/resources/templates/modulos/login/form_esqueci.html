@@ -9,7 +9,7 @@
 </head>
 <body>
 <div class="container_block">
-    <th:block th:replace="base/fragments/topbar :: topbar-time"></th:block>
+<!--    <th:block th:replace="base/fragments/topbar :: topbar-time"></th:block>-->
     <th:block th:replace="base/modal/modal :: modal"></th:block>
     <span th:text="${session.rodape != null ? session.rodape.textCopyright : 'Texto padrão'}"></span>
     <link th:href="${theme != null ? theme : 'core2.css'}" rel="stylesheet">
@@ -17,12 +17,15 @@
     <div class="block_center">
         <section>
             <form th:action="@{/v1/login/solicitar-nova-senha}" name="validate_login" id="validate_login" method="post" class="block_shodow">
+                <div class="d-flex justify-content-center">
+                    <img class="navbar-brand" th:src="@{/assets/imagens/brasao-ecc.png}" height="90"></img>
+                </div>
                 <h3 class="text-center text_topo">Solicitar nova senha</h3>
                 <div class="mb-3">
                     <label for="email" class="form-label">Email</label>
                     <input type="email" class="form-control" id="email" name="email" placeholder="name@example.com" autocomplete="@gmail.com">
                 </div>
-                <div class="mb-3">
+                <div class="mb-3 text-end">
                     <button type="submit" class="btn btn-success">Solicitar</button>
                 </div>
             </form>

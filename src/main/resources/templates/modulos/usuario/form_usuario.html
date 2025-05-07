@@ -59,7 +59,9 @@
                             <select class="form-control" id="tipo" name="tipo" th:field="*{tipo}" required>
                                 <option value="">Selecione uma opção</option>
                                 <option value="ROLE_ADMINISTRADOR">Administrador</option>
-                                <option value="ROLE_USUARIO">Servidor(a)</option>
+                                <option value="ROLE_DIOCESANO">Servidor(a)</option>
+                                <option value="ROLE_SETORIAL">Servidor(a)</option>
+                                <option value="ROLE_PAROQUIAL">Servidor(a)</option>
                             </select>
                             <span th:if="${#fields.hasErrors('tipo')}" th:errors="*{tipo}" class="error">Campo Obrigatório</span>
                         </div>

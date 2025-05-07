@@ -18,7 +18,7 @@ $(document).ready(function(key, form){
             var retorno = $(".retorno",form).val();
             var usaRetorno = $(".usaRetorno",form).val();
             var url = $(".url",form).val();
-            var servico = url.replaceAll("/sorteio/v1/","");
+            var servico = url.replaceAll("/ecc/v1/","");
             var dados = $(form).serializeArray();
             //do something here
             $("#div_resultado").html("<div class='d-flex align-items-center justify-content-center ms-auto'>"+
@@ -26,7 +26,7 @@ $(document).ready(function(key, form){
                                                 "<strong><pre class='m-0 p-3'> Efetuando operação...</pre></strong></div>");
             $("#modal_elemento").modal("show");
             setTimeout(function() {
-    //            form.submit();
+               form.submit();
                 enviar_form(url, retorno, dados, metodo, usaRetorno, servico);
             }, 2000);
           }

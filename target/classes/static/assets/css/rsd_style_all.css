@@ -152,7 +152,7 @@ i{
 
 .btn-lgn{
     padding: 5px;
-    background: #0de3df;
+    background: #797d7d;
     border-radius: 25px;
     border: 0px;
     width: 100px;
@@ -160,8 +160,8 @@ i{
 .btn-lgn:hover {
   color: white;
   font-weight: 500;
-  border-bottom: 2px solid green;
-  background: #099a97;
+  border-bottom: 2px solid #576057;
+  background: #2e3232;
 }
 
 time{
