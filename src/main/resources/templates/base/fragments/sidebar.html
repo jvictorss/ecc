@@ -9,8 +9,8 @@
         <div class="app-brand demo">
             <span class="app-brand-link">
                 <span class="app-brand-logo demo"></span>
-                    <img class="logo_img" th:src="@{/assets/imagens/definicoes.png}" height="50" th:if="${themeRSD == 'core-dark.css'}">
-                    <img class="logo_img" th:src="@{/assets/imagens/definicoes.png}" height="50" th:if="${themeRSD == 'core2.css'}">
+                    <img class="logo_img" th:src="@{/assets/imagens/couple.png}" height="50" th:if="${themeRSD == 'core-dark.css'}">
+                    <img class="logo_img" th:src="@{/assets/imagens/couple.png}" height="50" th:if="${themeRSD == 'core2.css'}">
                 </span>
             </span>
             <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto">
@@ -52,8 +52,15 @@
 
             <li class="menu-item" th:classappend="${lk6} ? 'active' : ''">
                 <a th:href="@{/v1/painel/casal/list}" class="menu-link">
-                    <i class="menu-icon tf-icons bx bx-current-location"></i>
+                    <i class="menu-icon tf-icons bx bx-building"></i>
                     <div data-i18n="Analytics">Casais</div>
+                </a>
+            </li>
+
+            <li class="menu-item" th:classappend="${lk7} ? 'active' : ''">
+                <a th:href="@{/v1/painel/report/list}" class="menu-link">
+                    <i class="menu-icon tf-icons bx bxs-report"></i>
+                    <div data-i18n="Analytics">Relatórios</div>
                 </a>
             </li>
 

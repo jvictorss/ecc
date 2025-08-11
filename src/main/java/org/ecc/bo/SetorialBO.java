@@ -10,4 +10,13 @@ public class SetorialBO extends BaseBO<SetorialEntity, Long> {
     public SetorialBO(SetorialRepository setorialRepository) {
         super(setorialRepository);
     }
+
+//    public SetorialEntity save(SetorialEntity setorial) {
+//        try {
+//            Long id = this.manterObject(setorial);
+//            return ((SetorialRepository) this.baseRepository).findById(id).orElseThrow(() -> new RuntimeException("Setorial não encontrado após salvar"));
+//        } catch (Exception e) {
+//            throw new RuntimeException("Erro ao salvar Setorial", e);
+//        }
+//    }
 }

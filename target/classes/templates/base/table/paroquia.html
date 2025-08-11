@@ -50,7 +50,7 @@
                             className: 'text-center'
                         },
                         {
-                            data: 'nome',
+                            data: 'nome_paroquia',
                             render:function (data){
                                 if(data == null){return "";}
                                 var splited = data.split(" ");
@@ -74,7 +74,31 @@
                             }
                         },
                         {
+                            data: 'setorial',
+                            render:function (data){
+                                if(data == null){return "";}
+                                var splited = data.split(" ");
+                                if(data!=='' && splited.length>4){
+                                    return splited[0]+' '+splited[1]+' '+splited[2]+' '+splited[3]+"...  "+"<a class='text-info' onclick='ver_mais(\""+data+"\")'>Ver mais</a>";
+                                }else{
+                                    return data;
+                                }
+                            }
+                        },
+                        {
                             data: 'estado',
+                            render:function (data){
+                                if(data == null){return "";}
+                                var splited = data.split(" ");
+                                if(data!=='' && splited.length>4){
+                                    return splited[0]+' '+splited[1]+' '+splited[2]+' '+splited[3]+"...  "+"<a class='text-info' onclick='ver_mais(\""+data+"\")'>Ver mais</a>";
+                                }else{
+                                    return data;
+                                }
+                            }
+                        },
+                        {
+                            data: 'diocese',
                             render:function (data){
                                 if(data == null){return "";}
                                 var splited = data.split(" ");

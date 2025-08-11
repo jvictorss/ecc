@@ -28,13 +28,11 @@ public class CasalController extends BaseController<CasalEntity, Long> {
         this.casalBO = casalBO1;
     }
 
-//    @GetMapping
-//    public String showDiocese(Model model, HttpSession session){
-//        model.addAttribute("lk2",true);
-//        session.setAttribute("nameApi", "Gerenciamento de dados ECC");
-//        System.out.println("Session nameAPI: " + session.getAttribute("nameAPI"));
-//        return "/modulos/casal/list_casal";
-//    }
+    @GetMapping("/form")
+    public String exibirFormulario(Model model) {
+        model.addAttribute("casal", new CasalEntity());
+        return "modulos/casal/form_casal"; // Nome do template
+    }
 
     @GetMapping
     @ResponseBody

@@ -42,10 +42,10 @@ package org.ecc.entity;
         @Email
         private String emailCasalSetorial;
 
-        @NotNull
-        @ManyToOne(fetch = FetchType.LAZY)
-        @JoinColumn(name = "diocese_id", nullable = false)
-        private DioceseEntity diocese;
+//        @NotNull
+//        @ManyToOne(fetch = FetchType.LAZY)
+//        @JoinColumn(name = "diocese_id", nullable = false)
+//        private DioceseEntity diocese;
 
         private String observacao;
     }

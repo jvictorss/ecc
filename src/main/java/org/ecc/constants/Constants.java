@@ -1,6 +1,9 @@
 package org.ecc.constants;
 
+import org.ecc.entity.CasalEntity;
 import org.ecc.entity.DioceseEntity;
+import org.ecc.entity.ParoquiaEntity;
+import org.ecc.entity.SetorialEntity;
 import org.ecc.entity.UsuarioEntity;
 import org.springframework.stereotype.Component;
 
@@ -31,6 +34,9 @@ public class Constants {
 
         entidades.put("usuario", new UsuarioEntity());
         entidades.put("diocese", new DioceseEntity());
+        entidades.put("setorial", new SetorialEntity());
+        entidades.put("casal", new CasalEntity());
+        entidades.put("paroquia", new ParoquiaEntity());
 
         listModels.put("cidadao","cidadaos");
 

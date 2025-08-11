@@ -15,8 +15,6 @@
                         "sInfo": "Mostrando de _START_ até _END_ de _TOTAL_ registros",
                         "sInfoEmpty": "Mostrando 0 até 0 de 0 registros",
                         "sInfoFiltered": "(Filtrados de _MAX_ registros)",
-                        "sInfoPostFix": "",
-                        "sInfoThousands": ".",
                         "sLengthMenu": "Exibindo _MENU_ resultados por página",
                         "sLoadingRecords": "Carregando...",
                         "sProcessing": "Processando...",
@@ -44,76 +42,76 @@
                         {
                             data: 'id',
                             render: function (data, type, row, meta) {
-                                var modificadores = [];
-                                return "<a class='text-center fw-bold' href='#' onclick='showDados("+JSON.stringify(row)+","+JSON.stringify(modificadores)+")'>" + (parseFloat(meta.row)+1) + "</a>";
+                                return "<a class='text-center fw-bold' href='#' onclick='showDados("+JSON.stringify(row)+")'>" + (parseFloat(meta.row)+1) + "</a>";
                             },
                             className: 'text-center'
                         },
                         {
-                            data: 'nome',
-                            render:function (data){
-                                if(data == null){return "";}
-                                var splited = data.split(" ");
-                                if(data!=='' && splited.length>4){
-                                    return splited[0]+' '+splited[1]+' '+splited[2]+' '+splited[3]+"...  "+"<a class='text-info' onclick='ver_mais(\""+data+"\")'>Ver mais</a>";
-                                }else{
-                                    return data;
-                                }
+                            data: 'apelidoEle',
+                            render: function (data) {
+                                return data ? data : "";
+                            }
+                        },
+                        {
+                            data: 'apelidoEla',
+                            render: function (data) {
+                                return data ? data : "";
+                            }
+                        },
+                        {
+                            data: 'telefoneEle',
+                            render: function (data) {
+                                return data ? data : "";
+                            }
+                        },
+                        {
+                            data: 'telefoneEla',
+                            render: function (data) {
+                                return data ? data : "";
+                            }
+                        },
+                        {
+                            data: 'paroquiaEcc',
+                            render: function (data) {
+                                return data ? data : "";
                             }
                         },
                         {
                             data: 'cidade',
-                            render:function (data){
-                                if(data == null){return "";}
-                                var splited = data.split(" ");
-                                if(data!=='' && splited.length>4){
-                                    return splited[0]+' '+splited[1]+' '+splited[2]+' '+splited[3]+"...  "+"<a class='text-info' onclick='ver_mais(\""+data+"\")'>Ver mais</a>";
-                                }else{
-                                    return data;
-                                }
+                            render: function (data) {
+                                return data ? data : "";
                             }
                         },
                         {
-                            data: 'estado',
-                            render:function (data){
-                                if(data == null){return "";}
-                                var splited = data.split(" ");
-                                if(data!=='' && splited.length>4){
-                                    return splited[0]+' '+splited[1]+' '+splited[2]+' '+splited[3]+"...  "+"<a class='text-info' onclick='ver_mais(\""+data+"\")'>Ver mais</a>";
-                                }else{
-                                    return data;
-                                }
+                            data: 'setorial',
+                            render: function (data) {
+                                return data ? data : "";
                             }
                         },
                         {
-                            data: 'ativo',
-                            render: function (data){
+                            data: 'isActive',
+                            render: function (data) {
                                 return data === true ? '<span class="badge bg-success">Ativo</span>' : '<span class="badge bg-danger">Inativo</span>';
                             }
                         },
                         {
                             data: 'criado',
                             bSortable: false,
-                            render: function (data, type, row){
-                                var status = "true";
-                                var tipo = "Ativar";
-                                var stylo = "text-success";
-                                if(row.ativo){
-                                    status = "false";
-                                    tipo = "Inativar";
-                                    stylo = "text-danger";
-                                }
+                            render: function (data, type, row) {
+                                var status = row.isActive ? "false" : "true";
+                                var tipo = row.isActive ? "Inativar" : "Ativar";
+                                var stylo = row.isActive ? "text-danger" : "text-success";
                                 return '<div class="d-flex align-items-center">'+
-                                               '  <div class="dropdown"><a href="javascript:;" class="btn dropdown-toggle hide-arrow text-body p-0" data-bs-toggle="dropdown" aria-expanded="false"><i class="bx bx-dots-vertical-rounded"></i></a>'+
-                                               '     <div class="dropdown-menu dropdown-menu-end">'+
-                                               '       <a href="javascript:void(0);" class="dropdown-item" id="srv-editar" data-id="'+row.id+'"'+
-                                               '        data-nome="'+row.nome+'" data-servico="casal" data-sd1="2" data-sd2="3">Editar</a>'+
-                                               '       <div class="dropdown-divider"></div>'+
-                                               '       <a href="javascript:void(0);" class="dropdown-item '+stylo+'" data-metodo="POST" id="srv-generico" data-url="/inativar?id='+row.id+'&acao='+status+'"'+
-                                               '        data-nome="'+row.nome+'" data-usaretorno="false" data-retorno="/ecc/v1/painel/casal/list" data-servico="casal">'+tipo+'</a>'+
-                                               '     </div>'+
-                                               '   </div>'+
-                                               ' </div>';
+                                       '  <div class="dropdown"><a href="javascript:;" class="btn dropdown-toggle hide-arrow text-body p-0" data-bs-toggle="dropdown" aria-expanded="false"><i class="bx bx-dots-vertical-rounded"></i></a>'+
+                                       '     <div class="dropdown-menu dropdown-menu-end">'+
+                                       '       <a href="javascript:void(0);" class="dropdown-item" id="srv-editar" data-id="'+row.id+'"'+
+                                       '        data-nome="'+row.apelidoEle+'" data-servico="casal">Editar</a>'+
+                                       '       <div class="dropdown-divider"></div>'+
+                                       '       <a href="javascript:void(0);" class="dropdown-item '+stylo+'" data-metodo="POST" id="srv-generico" data-url="/inativar?id='+row.id+'&acao='+status+'"'+
+                                       '        data-nome="'+row.apelidoEle+'" data-usaretorno="false" data-retorno="/ecc/v1/painel/casal/list" data-servico="casal">'+tipo+'</a>'+
+                                       '     </div>'+
+                                       '   </div>'+
+                                       ' </div>';
                             }
                         }
                     ]

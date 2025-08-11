@@ -55,16 +55,22 @@ public class InterceptorConfig implements HandlerInterceptor, WebMvcConfigurer {
             Object path = modelAndView.getModel().get("path");
             if(modelAndView.getViewName().contains("error")){
                 session.setAttribute("error",modelAndView.getModel());
-                if(path.toString().contains("/site")){
+                if(path != null && path.toString().contains("/site")){
                     Object statusCode = modelAndView.getModel().get("status");
-                    if(statusCode.equals(405)){
-                        response.setStatus(HttpServletResponse.SC_TEMPORARY_REDIRECT);
-                        response.setHeader("Location", "?exception");
+                    if(statusCode != null && statusCode.equals(405)){
+                        if(!response.isCommitted()) {
+                            response.setStatus(HttpServletResponse.SC_TEMPORARY_REDIRECT);
+                            response.setHeader("Location", "?exception");
+                        }
                     }else{
-                        response.sendRedirect("?exception");
+                        if(!response.isCommitted()) {
+                            response.sendRedirect("?exception");
+                        }
                     }
                 }else{
-                    response.sendRedirect(name + "/v1/painel?exception");
+                    if(!response.isCommitted()) {
+                        response.sendRedirect(name + "/v1/painel?exception");
+                    }
                 }
             }
             modelAndView.addObject("iconTheme", readServletCookie(request, "iconTheme").orElse("bx-sun"));
